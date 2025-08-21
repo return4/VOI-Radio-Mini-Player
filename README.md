@@ -7,7 +7,7 @@ Listen to **VOI Radio** on any website using this tiny embed.
 2. Click **VOI RADIO** to open the official site.
 
 ## Embed on your website
-Copy & paste:
+
 ```html
 <iframe
   src="https://return4.github.io/VOI-Radio-Mini-Player/"
