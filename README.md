@@ -17,3 +17,9 @@ Listen to **VOI Radio** on any website using this tiny embed.
   allow="autoplay"
   scrolling="no">
 </iframe>
+
+## Notes
+
+Works in light/dark mode automatically.
+
+Browsers require a click to start audio; the Play button handles it.
