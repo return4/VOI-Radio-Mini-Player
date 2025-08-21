@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VOI Radio – Ultra Minimal Auto‑Glass Player</title>
+  <style>
+    html, body { margin:0; height:100%; background:transparent; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    .wrap { height:100%; display:grid; place-items:center; padding:4px; }
+
+    /* Shared violet gradient animation (border + buttons) */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position:  0% 50%; }
+    }
+
+    /* Light glass by default */
+    :root {
+      --glass-bg: rgba(255,255,255,0.15);
+      --glass-border: rgba(0,0,0,0.08);
+      --glass-shadow: 0 4px 18px rgba(0,0,0,0.25);
+      --grad-a: #7b2ff7;
+      --grad-b: #f107a3;
+    }
+
+    /* Dark glass */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --glass-bg: rgba(0,0,0,0.30);
+        --glass-border: rgba(255,255,255,0.20);
+        --glass-shadow: 0 4px 18px rgba(0,0,0,0.40);
+      }
+    }
+
+    .capsule {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:6px 14px; border-radius:999px; position:relative;
+      background:var(--glass-bg); border:1px solid var(--glass-border);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      box-shadow:var(--glass-shadow);
+    }
+
+    /* Subtle animated violet outline */
+    .capsule::before {
+      content:""; position:absolute; inset:0; border-radius:inherit; padding:2px;
+      background:linear-gradient(270deg, var(--grad-a), var(--grad-b), var(--grad-a));
+      background-size:400% 400%; animation:gradientShift 6s ease infinite;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor; mask-composite:exclude;
+      pointer-events:none;
+    }
+
+    /* Buttons share the same animated gradient */
+    .btn, .link-btn {
+      background:linear-gradient(270deg, var(--grad-a), var(--grad-b), var(--grad-a));
+      background-size:400% 400%; animation:gradientShift 6s ease infinite;
+    }
+
+    /* Play / Pause button */
+    .btn {
+      width:42px; height:42px; border-radius:50%; border:0;
+      display:inline-flex; justify-content:center; align-items:center;
+      cursor:pointer; transition:transform .18s ease, box-shadow .18s ease; z-index:1;
+    }
+    .btn:hover { transform:scale(1.08); box-shadow:0 0 14px rgba(123,47,247,0.6); }
+    .btn svg { width:20px; height:20px; fill:#fff; }
+
+    /* VOI RADIO pill link */
+    .link-btn {
+      padding:6px 16px; border-radius:999px; color:#fff; text-decoration:none;
+      font-weight:700; font-size:13px; white-space:nowrap;
+      transition:transform .2s ease, box-shadow .2s ease; z-index:1;
+    }
+    .link-btn:hover { transform:scale(1.05); box-shadow:0 0 12px rgba(123,47,247,0.5); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="capsule" role="group" aria-label="VOI Radio ultra minimal player">
+      <button class="btn" id="playPause" aria-label="Play">
+        <!-- PLAY -->
+        <svg id="iconPlay" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <!-- PAUSE -->
+        <svg id="iconPause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+
+      <a class="link-btn" href="https://radio.voi.casino" target="_blank" rel="noopener noreferrer" aria-label="Open VOI Radio in a new tab">
+        VOI RADIO
+      </a>
+    </div>
+  </div>
+
+  <audio id="radio" preload="none">
+    <source src="https://radio.voi.casino/stream.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const btn = document.getElementById('playPause');
+    const audio = document.getElementById('radio');
+    const iconPlay = document.getElementById('iconPlay');
+    const iconPause = document.getElementById('iconPause');
+    let playing = false;
+
+    function syncIcon(){
+      iconPlay.style.display = playing ? 'none' : 'block';
+      iconPause.style.display = playing ? 'block' : 'none';
+      const label = playing ? 'Pause' : 'Play';
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+    }
+
+    btn.addEventListener('click', () => {
+      if (!playing) {
+        audio.play()
+          .then(() => { playing = true; syncIcon(); })
+          .catch(err => console.error('Playback error:', err));
+      } else {
+        audio.pause();
+        playing = false;
+        syncIcon();
+      }
+    });
+
+    audio.addEventListener('playing', () => { playing = true;  syncIcon(); });
+    audio.addEventListener('pause',   () => { playing = false; syncIcon(); });
+    audio.addEventListener('ended',   () => { playing = false; syncIcon(); });
+  </script>
+</body>
+</html>
