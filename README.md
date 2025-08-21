@@ -1,36 +1,19 @@
-📻 **VOI Radio – Mini Player**
-Ultra-minimal embeddable VOI Radio player (glass UI, animated violet gradient). Host on GitHub Pages and embed via &lt;iframe>.
+# 📻 VOI Radio – Mini Player
 
-This mini-player lets you:
+Listen to **VOI Radio** on any website using this tiny embed.
 
-🎵 Listen to VOI Radio directly on your website
+## Use
+1. Press **Play** ▶️ to start, **Pause** ⏸ to stop.
+2. Click **VOI RADIO** to open the official site.
 
-▶️ Start/stop the stream with one button
-
-🔗 Click VOI RADIO to open the main site
-
-🔹 How to use
-
-Press the Play button ▶️ to start the music.
-
-Press the Pause button ⏸ to stop.
-
-Click VOI RADIO to visit radio.voi.casino
-
-
-
-🔹 How to embed on your website
-
-Just copy this code and paste it into your website (in the place where you want the player to appear):
-
+## Embed on your website
+Copy & paste:
+```html
 <iframe
-  src="https://your-username.github.io/voi-radio-player/"
+  src="https://return4.github.io/VOI-Radio-Mini-Player/"
   width="280"
   height="80"
   style="border:0; overflow:hidden; background:transparent;"
   allow="autoplay"
   scrolling="no">
 </iframe>
-
-
-**That’s it – the player will show up and work immediately. 🎶**
