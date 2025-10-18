@@ -66,7 +66,7 @@
     .btn:hover { transform:scale(1.08); box-shadow:0 0 14px rgba(123,47,247,0.6); }
     .btn svg { width:20px; height:20px; fill:#fff; }
 
-    /* All Go  pill link */
+    /* All Go RADIO pill link */
     .link-btn {
       padding:6px 16px; border-radius:999px; color:#fff; text-decoration:none;
       font-weight:700; font-size:13px; white-space:nowrap;
@@ -77,7 +77,7 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="capsule" role="group" aria-label="All Go  ultra minimal player">
+    <div class="capsule" role="group" aria-label="All Go Radio ultra minimal player">
       <button class="btn" id="playPause" aria-label="Play">
         <!-- PLAY -->
         <svg id="iconPlay" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -85,19 +85,19 @@
         <svg id="iconPause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
       </button>
 
-      <a class="link-btn" href="https://.voi.casino" target="_blank" rel="noopener noreferrer" aria-label="Open All Go  in a new tab">
-        All Go 
+      <a class="link-btn" href="https://radio.voi.casino" target="_blank" rel="noopener noreferrer" aria-label="Open All Go Radio in a new tab">
+        All GO
       </a>
     </div>
   </div>
 
-  <audio id="" preload="none">
-    <source src="https://.voi.casino/stream.mp3" type="audio/mpeg">
+  <audio id="radio" preload="none">
+    <source src="https://radio.voi.casino/stream.mp3" type="audio/mpeg">
   </audio>
 
   <script>
     const btn = document.getElementById('playPause');
-    const audio = document.getElementById('');
+    const audio = document.getElementById('radio');
     const iconPlay = document.getElementById('iconPlay');
     const iconPause = document.getElementById('iconPause');
     let playing = false;
